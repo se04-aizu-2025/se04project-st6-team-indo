@@ -1,24 +1,25 @@
-def heapify(arr, n, i):
-    largest = i    
-    l = 2 * i + 1    
-    r = 2 * i + 2  
+from base import SortingAlgorithm
 
-    if l < n and arr[l] > arr[largest]:
-        largest = l
+class HeapSort(SortingAlgorithm):
+    def heapify(self, n, i):
+        largest = i
+        left = 2 * i + 1
+        right = 2 * i + 2
 
-    if r < n and arr[r] > arr[largest]:
-        largest = r
+        if left < n and self.data[left] > self.data[largest]:
+            largest = left
+        if right < n and self.data[right] > self.data[largest]:
+            largest = right
 
-    if largest != i:
-        arr[i], arr[largest] = arr[largest], arr[i]
-        heapify(arr, n, largest)
+        if largest != i:
+            self.data[i], self.data[largest] = self.data[largest], self.data[i]
+            self.heapify(n, largest)
 
-def heapSort(arr):
-    n = len(arr)
-
-    for i in range(n // 2 - 1, -1, -1):
-        heapify(arr, n, i)
-
-    for i in range(n - 1, 0, -1):
-        arr[i], arr[0] = arr[0], arr[i]  # Swap max to end
-        heapify(arr, i, 0)
+    def sort(self):
+        n = len(self.data)
+        for i in range(n // 2 - 1, -1, -1):
+            self.heapify(n, i)
+        for i in range(n - 1, 0, -1):
+            self.data[i], self.data[0] = self.data[0], self.data[i]
+            self.heapify(i, 0)
+        return self.data

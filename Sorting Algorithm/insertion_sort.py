@@ -1,14 +1,12 @@
-def insertionSort(arr):
-    for i in range(1, len(arr)):
-        key = arr[i]
-        j = i - 1
-        
-        while j >= 0 and key < arr[j]:
-            arr[j + 1] = arr[j]
-            j -= 1
-        arr[j + 1] = key
+from base import SortingAlgorithm
 
-def print_insertion(arr):
-    for i in range(len(arr)):
-        print(arr[i], end=" ")
-    print()
+class InsertionSort(SortingAlgorithm):
+    def sort(self):
+        for i in range(1, len(self.data)):
+            key = self.data[i]
+            j = i - 1
+            while j >= 0 and self.data[j] > key:
+                self.data[j + 1] = self.data[j]
+                j -= 1
+            self.data[j + 1] = key
+        return self.data
