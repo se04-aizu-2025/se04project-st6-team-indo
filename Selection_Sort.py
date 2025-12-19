@@ -7,3 +7,6 @@ def selectionSort(array, size):
                 min_index = j
 
         array[ind], array[min_index] = array[min_index], array[ind]
+
+def printselectionsort(arr):
+    print(arr)
