@@ -1,12 +1,11 @@
-from Bubble_Sort import bubbleSort
-from Selection_Sort import selectionSort
-from insertion_sort import insertionSort
-from merge_sort import mergeSort
-from quick_sort import quickSort
-from Heap_Sort import heapSort
+from Bubble_Sort import BubbleSort
+from Selection_Sort import SelectionSort
+from insertion_sort import InsertionSort
+from merge_sort import MergeSort
+from quick_sort import QuickSort
+from Heap_Sort import HeapSort
 
 from data_engineer import DataEngineer
-from base import FunctionSortAdapter
 from test_engine import SortingTestEngine
 
 
@@ -17,12 +16,12 @@ def main():
     print(f"Original Array:\n{base_data}\n")
 
     algorithms = [
-        FunctionSortAdapter(base_data.copy(), bubbleSort),
-        FunctionSortAdapter(base_data.copy(), selectionSort),
-        FunctionSortAdapter(base_data.copy(), insertionSort),
-        FunctionSortAdapter(base_data.copy(), mergeSort),
-        FunctionSortAdapter(base_data.copy(), quickSort),
-        FunctionSortAdapter(base_data.copy(), heapSort),
+        BubbleSort(base_data.copy()),
+        SelectionSort(base_data.copy()),
+        InsertionSort(base_data.copy()),
+        MergeSort(base_data.copy()),
+        QuickSort(base_data.copy()),
+        HeapSort(base_data.copy()),
     ]
 
     test_engine = SortingTestEngine(algorithms)
