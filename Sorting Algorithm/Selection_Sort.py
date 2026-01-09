@@ -1,12 +1,12 @@
-def selectionSort(array, size):
-    for ind in range(size):
-        min_index = ind
+from base import SortingAlgorithm
 
-        for j in range(ind + 1, size):
-            if array[j] < array[min_index]:
-                min_index = j
-
-        array[ind], array[min_index] = array[min_index], array[ind]
-
-def printselectionsort(arr):
-    print(arr)
+class SelectionSort(SortingAlgorithm):
+    def sort(self):
+        n = len(self.data)
+        for i in range(n):
+            min_idx = i
+            for j in range(i+1, n):
+                if self.data[j] < self.data[min_idx]:
+                    min_idx = j
+            self.data[i], self.data[min_idx] = self.data[min_idx], self.data[i]
+        return self.data

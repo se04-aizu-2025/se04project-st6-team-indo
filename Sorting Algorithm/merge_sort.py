@@ -1,42 +1,28 @@
-def merge(arr, left, mid, right):
-    n1 = mid - left + 1
-    n2 = right - mid
-    
-    L = [0] * n1
-    R = [0] * n2
+from base import SortingAlgorithm
 
-    for i in range(n1):
-        L[i] = arr[left + i]
-    for j in range(n2):
-        R[j] = arr[mid + 1 + j]
-        
-    i = 0  
-    j = 0  
-    k = left  
-    
-    while i < n1 and j < n2:
-        if L[i] <= R[j]:
-            arr[k] = L[i]
-            i += 1
-        else:
-            arr[k] = R[j]
-            j += 1
-        k += 1
+class MergeSort(SortingAlgorithm):
+    def sort(self):
+        self.data = self._merge_sort(self.data)
+        return self.data
 
-    while i < n1:
-        arr[k] = L[i]
-        i += 1
-        k += 1
+    def _merge_sort(self, arr):
+        if len(arr) <= 1:
+            return arr
+        mid = len(arr)//2
+        left = self._merge_sort(arr[:mid])
+        right = self._merge_sort(arr[mid:])
+        return self._merge(left, right)
 
-    while j < n2:
-        arr[k] = R[j]
-        j += 1
-        k += 1
-
-def mergeSort(arr, left, right):
-    if left < right:
-        mid = (left + right) // 2
-
-        mergeSort(arr, left, mid)
-        mergeSort(arr, mid + 1, right)
-        merge(arr, left, mid, right)
+    def _merge(self, left, right):
+        result = []
+        i = j = 0
+        while i < len(left) and j < len(right):
+            if left[i] < right[j]:
+                result.append(left[i])
+                i += 1
+            else:
+                result.append(right[j])
+                j += 1
+        result.extend(left[i:])
+        result.extend(right[j:])
+        return result

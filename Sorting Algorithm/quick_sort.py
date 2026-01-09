@@ -1,18 +1,22 @@
-def partition(arr, low, high):
-    pivot = arr[high]
-    i = low - 1
-    for j in range(low, high):
-        if arr[j] < pivot:
-            i += 1
-            swap(arr, i, j)
-    swap(arr, i + 1, high)
-    return i + 1
+from base import SortingAlgorithm
 
-def swap(arr, i, j):
-    arr[i], arr[j] = arr[j], arr[i]
+class QuickSort(SortingAlgorithm):
+    def sort(self):
+        self._quick_sort(0, len(self.data)-1)
+        return self.data
 
-def quickSort(arr, low, high):
-    if low < high:
-        pi = partition(arr, low, high)
-        quickSort(arr, low, pi - 1)
-        quickSort(arr, pi + 1, high)
+    def _quick_sort(self, low, high):
+        if low < high:
+            pi = self._partition(low, high)
+            self._quick_sort(low, pi-1)
+            self._quick_sort(pi+1, high)
+
+    def _partition(self, low, high):
+        pivot = self.data[high]
+        i = low - 1
+        for j in range(low, high):
+            if self.data[j] <= pivot:
+                i += 1
+                self.data[i], self.data[j] = self.data[j], self.data[i]
+        self.data[i+1], self.data[high] = self.data[high], self.data[i+1]
+        return i+1
