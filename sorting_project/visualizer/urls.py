@@ -11,9 +11,9 @@ urlpatterns = [
     path('selection/', views.selection_sort, name='selection'),
     
     path('bubble/run/', views.bubble_sort_view, name='bubble_run'),
-    #path('heap/run/', views.heap_sort_view, name='heap_run'),
-    #path('insertion/run/', views.insertion_sort_view, name='insertion_run'),
+    path('heap/run/', views.heap_sort_view, name='heap_run'),
+    path('insertion/run/', views.insertion_sort_view, name='insertion_run'),
     path('merge/run/', views.merge_sort_view, name='merge_run'),
-    #path('quick/run/', views.quick_sort_view, name='quick_run'),
-    #path('selection/run/', views.selection_sort_view, name='selection_run'),
+    path('quick/run/', views.quick_sort_view, name='quick_run'),
+    path('selection/run/', views.selection_sort_view, name='selection_run'),
 ]

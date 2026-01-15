@@ -1,4 +1,4 @@
-from base import SortingAlgorithm
+from .base import SortingAlgorithm
 
 class QuickSort(SortingAlgorithm):
     def sort(self):

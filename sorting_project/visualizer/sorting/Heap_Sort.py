@@ -1,4 +1,4 @@
-from base import SortingAlgorithm
+from .base import SortingAlgorithm
 
 class HeapSort(SortingAlgorithm):
     def heapify(self, n, i):

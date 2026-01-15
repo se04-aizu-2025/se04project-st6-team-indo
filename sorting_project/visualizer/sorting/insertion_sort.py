@@ -1,4 +1,4 @@
-from base import SortingAlgorithm
+from .base import SortingAlgorithm
 
 class InsertionSort(SortingAlgorithm):
     def sort(self):
