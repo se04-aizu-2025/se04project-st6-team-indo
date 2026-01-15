@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Merge Sort</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .number-box {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            line-height: 50px;
+            margin: 5px;
+            background-color: #0d6efd; /* blue for boxes */
+            color: white;
+            font-weight: bold;
+            border-radius: 5px;
+        }
+
+        .sorted-container {
+            background-color: #d4edda; /* light green behind sorted array */
+            padding: 15px;
+            border-radius: 8px;
+            display: inline-block;
+        }
+
+        .buttons-container {
+            margin-top: 20px;
+        }
+
+        .home-button-container {
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body class="bg-light">
+<div class="container text-center mt-5">
+    <h1 class="display-4 fw-bold">Merge Sort</h1>
+    <p class="lead text-muted mt-3">
+        "Merge sort description"
+    </p>
+
+    <form method="POST" action="{% url 'merge_run' %}">
+        {% csrf_token %}
+
+        <div style="margin:50px 0;">
+            {% for num in numbers %}
+                <div class="number-box">{{ num }}</div>
+            {% empty %}
+                <p>Click "Randomize Numbers" to generate numbers</p>
+            {% endfor %}
+        </div>
+
+        {% if numbers %}
+            <input type="hidden" name="numbers_array" value="{{ numbers|join:' ' }}">
+        {% endif %}
+
+        <div class="buttons-container">
+            <button type="submit" name="randomize" class="btn btn-warning me-2">Randomize Numbers</button>
+            <button type="submit" name="sort" class="btn btn-primary" {% if not numbers %}disabled{% endif %}>Start Sorting</button>
+        </div>
+    </form>
+
+    {% if sorted_data %}
+        <div class="mt-5 sorted-container">
+            <h5>Sorted Result:</h5>
+            {% for num in sorted_data %}
+                <div class="number-box">{{ num }}</div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <div class="home-button-container d-flex justify-content-center">
+        <a href="{% url 'landing' %}" class="btn btn-secondary">Back to Menu</a>
+    </div>
+</div>
+</body>
+</html>
