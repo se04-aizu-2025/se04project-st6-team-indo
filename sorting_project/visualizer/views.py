@@ -102,7 +102,7 @@ def insertion_sort_view(request):
             sorter = InsertionSort(numbers_original.copy())  
             sorted_data = sorter.sort()
 
-    return render(request, "insertion_page.html", {
+    return render(request, "insert_page.html", {
         "numbers": numbers_original,  
         "sorted_data": sorted_data     
     })
