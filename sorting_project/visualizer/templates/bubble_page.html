@@ -11,14 +11,14 @@
             height: 50px;
             line-height: 50px;
             margin: 5px;
-            background-color: #0d6efd; /* blue for boxes */
+            background-color: #0d6efd; 
             color: white;
             font-weight: bold;
             border-radius: 5px;
         }
 
         .sorted-container {
-            background-color: #d4edda; /* light green behind sorted array */
+            background-color: #d4edda; 
             padding: 15px;
             border-radius: 8px;
             display: inline-block;
@@ -37,7 +37,9 @@
 <div class="container text-center mt-5">
     <h1 class="display-4 fw-bold">Bubble Sort</h1>
     <p class="lead text-muted mt-3">
-        "Bubble sort description"
+        "Bubble sort is a simple, comparison-based sorting algorithm that repeatedly steps through a list, 
+        compares adjacent elements, and swaps them if they are in the wrong order. The process is repeated until no swaps are needed in a 
+        full pass, indicating the list is sorted. "
     </p>
 
     <form method="POST" action="{% url 'bubble_run' %}">

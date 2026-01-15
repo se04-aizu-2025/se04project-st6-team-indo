@@ -11,14 +11,14 @@
             height: 50px;
             line-height: 50px;
             margin: 5px;
-            background-color: #0d6efd; /* blue for boxes */
+            background-color: #0d6efd; 
             color: white;
             font-weight: bold;
             border-radius: 5px;
         }
 
         .sorted-container {
-            background-color: #d4edda; /* light green behind sorted array */
+            background-color: #d4edda; 
             padding: 15px;
             border-radius: 8px;
             display: inline-block;
@@ -37,7 +37,9 @@
 <div class="container text-center mt-5">
     <h1 class="display-4 fw-bold">Merge Sort</h1>
     <p class="lead text-muted mt-3">
-        "Merge sort description"
+        "Merge sort uses the divide and conquer approach. It works by recursively dividing the 
+        input array into two halves, recursively sorting the two halves and finally merging back 
+        together to obtain the sorted array."
     </p>
 
     <form method="POST" action="{% url 'merge_run' %}">
