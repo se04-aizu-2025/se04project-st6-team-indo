@@ -2,27 +2,29 @@ from .base import SortingAlgorithm
 
 class MergeSort(SortingAlgorithm):
     def sort(self):
-        self.data = self._merge_sort(self.data)
+        self.steps = []              
+        arr = self.data.copy()
+        self._divide(arr)
+        self.data = sorted(arr)      
         return self.data
 
-    def _merge_sort(self, arr):
-        if len(arr) <= 1:
-            return arr
-        mid = len(arr)//2
-        left = self._merge_sort(arr[:mid])
-        right = self._merge_sort(arr[mid:])
-        return self._merge(left, right)
+    def get_steps(self):
+        if not hasattr(self, "steps"):
+            self.sort()
+        return self.steps
 
-    def _merge(self, left, right):
-        result = []
-        i = j = 0
-        while i < len(left) and j < len(right):
-            if left[i] < right[j]:
-                result.append(left[i])
-                i += 1
-            else:
-                result.append(right[j])
-                j += 1
-        result.extend(left[i:])
-        result.extend(right[j:])
-        return result
+    def _divide(self, arr):
+        if len(arr) <= 1:
+            return
+
+        mid = len(arr) // 2
+        left = arr[:mid]
+        right = arr[mid:]
+        
+        self.steps.append({
+            "left": left.copy(),
+            "right": right.copy()
+        })
+
+        self._divide(left)
+        self._divide(right)
