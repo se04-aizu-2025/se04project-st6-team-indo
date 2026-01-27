@@ -4,21 +4,30 @@
     <meta charset="UTF-8">
     <title>Insertion Sort</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
     <style>
-        .number-box {
-            display: inline-block;
+        .box {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
             width: 50px;
             height: 50px;
-            line-height: 50px;
             margin: 5px;
-            background-color: #0d6efd; 
             color: white;
             font-weight: bold;
             border-radius: 5px;
         }
 
+        .number-box {
+            background-color: #0d6efd;
+        }
+
+        .anim-box {
+            background-color: #198754;
+        }
+
         .sorted-container {
-            background-color: #d4edda; 
+            background-color: #d4edda;
             padding: 15px;
             border-radius: 8px;
             display: inline-block;
@@ -31,14 +40,42 @@
         .home-button-container {
             margin-top: 30px;
         }
+
+        .number-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 50px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .number {
+            padding: 10px 15px;
+            border-radius: 5px;
+            background-color: #0d6efd;
+            color: white;
+            transition: all 0.5s;
+        }
+
+        .active {
+            background-color: red !important;
+        }
+
+        .key {
+            background-color: #ffc107 !important;
+            color: black;
+        }
     </style>
 </head>
+
 <body class="bg-light">
 <div class="container text-center mt-5">
+
     <h1 class="display-4 fw-bold">Insertion Sort</h1>
+
     <p class="lead text-muted mt-3">
-        "Insertion sort is a simple, in-place, and stable sorting algorithm that builds a sorted list one element at a time. 
-        It is efficient for small data sets or data that is already nearly sorted, and it works similarly to how one might sort a hand of playing cards. "
+        Insertion sort is a simple, in-place, and stable sorting algorithm that builds a sorted list one element at a time.
     </p>
 
     <form method="POST" action="{% url 'insertion_run' %}">
@@ -46,7 +83,7 @@
 
         <div style="margin:50px 0;">
             {% for num in numbers %}
-                <div class="number-box">{{ num }}</div>
+                <div class="box number-box">{{ num }}</div>
             {% empty %}
                 <p>Click "Randomize Numbers" to generate numbers</p>
             {% endfor %}
@@ -57,16 +94,33 @@
         {% endif %}
 
         <div class="buttons-container">
-            <button type="submit" name="randomize" class="btn btn-warning me-2">Randomize Numbers</button>
-            <button type="submit" name="sort" class="btn btn-primary" {% if not numbers %}disabled{% endif %}>Start Sorting</button>
+            <button type="submit" name="randomize" class="btn btn-warning me-2">
+                Randomize Numbers
+            </button>
+
+            <button type="submit" name="sort" class="btn btn-primary"
+                    {% if not numbers %}disabled{% endif %}>
+                Start Sorting
+            </button>
+            <hr style="border: 2px solid black; width: 50%; margin: 20px auto;">
         </div>
     </form>
 
+    {% if steps %}
+        <div id="animation-area" class="my-5"></div>
+        <div class="buttons-container">
+            <button class="btn btn-success" onclick="startAnimation()">
+                Play Animation
+            </button>
+        </div>
+        <hr style="border: 2px solid black; width: 50%; margin: 20px auto;">
+    {% endif %}
+
     {% if sorted_data %}
-        <div class="mt-5 sorted-container">
+        <div id="sorted-result" class="mt-5 sorted-container" style="display:none;">
             <h5>Sorted Result:</h5>
             {% for num in sorted_data %}
-                <div class="number-box">{{ num }}</div>
+                <div class="box number-box">{{ num }}</div>
             {% endfor %}
         </div>
     {% endif %}
@@ -75,5 +129,48 @@
         <a href="{% url 'landing' %}" class="btn btn-secondary">Back to Menu</a>
     </div>
 </div>
+
+<script>
+const steps = {{ steps|safe }};
+let stepIndex = 0;
+
+function drawStep(array) {
+    const area = document.getElementById("animation-area");
+    area.innerHTML = "";
+
+    array.forEach(num => {
+        const box = document.createElement("div");
+        box.className = "box anim-box";
+        box.textContent = num;
+        area.appendChild(box);
+    });
+}
+
+async function startAnimation() {
+    if (!steps || steps.length === 0) return;
+
+    stepIndex = 0;
+
+    while (stepIndex < steps.length) {
+        drawStep(steps[stepIndex]);
+        stepIndex++;
+        await sleep();
+    }
+
+    const result = document.getElementById("sorted-result");
+    if (result) {
+        result.style.display = "inline-block";
+    }
+}
+
+function sleep() {
+    return new Promise(resolve => setTimeout(resolve, 3000));
+}
+
+if (steps && steps.length > 0) {
+    drawStep(steps[0]);
+}
+</script>
+
 </body>
 </html>

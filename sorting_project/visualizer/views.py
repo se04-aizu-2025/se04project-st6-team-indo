@@ -56,20 +56,25 @@ def bubble_sort_view(request):
 def merge_sort_view(request):
     numbers_original = []
     sorted_data = None
+    steps = []
 
     if request.method == "POST":
         if "randomize" in request.POST:
             data_engineer = DataEngineer(size=10, seed=None)
             numbers_original = data_engineer.generate()
+
         elif "sort" in request.POST:
             input_numbers = request.POST.get("numbers_array", "")
             numbers_original = [int(x) for x in input_numbers.strip().split()]
-            sorter = MergeSort(numbers_original.copy())  
+
+            sorter = MergeSort(numbers_original.copy())
             sorted_data = sorter.sort()
+            steps = sorter.get_steps()   
 
     return render(request, "merge_page.html", {
-        "numbers": numbers_original,  
-        "sorted_data": sorted_data     
+        "numbers": numbers_original,
+        "steps": steps,              
+        "sorted_data": sorted_data
     })
 
 def heap_sort_view(request):
@@ -113,20 +118,25 @@ def insertion_sort_view(request):
 def quick_sort_view(request):
     numbers_original = []
     sorted_data = None
+    steps = []
 
     if request.method == "POST":
         if "randomize" in request.POST:
             data_engineer = DataEngineer(size=10, seed=None)
             numbers_original = data_engineer.generate()
+
         elif "sort" in request.POST:
             input_numbers = request.POST.get("numbers_array", "")
             numbers_original = [int(x) for x in input_numbers.strip().split()]
-            sorter = QuickSort(numbers_original.copy())  
+
+            sorter = QuickSort(numbers_original.copy())
             sorted_data = sorter.sort()
+            steps = sorter.steps   
 
     return render(request, "quick_page.html", {
-        "numbers": numbers_original,  
-        "sorted_data": sorted_data     
+        "numbers": numbers_original,
+        "sorted_data": sorted_data,
+        "steps": steps
     })
 
 def selection_sort_view(request):
