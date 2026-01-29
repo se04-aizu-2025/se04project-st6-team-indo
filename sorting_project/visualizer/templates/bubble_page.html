@@ -165,6 +165,7 @@
             <!-- Controls -->
             <div class="controls">
                 <button class="play-btn" onclick="startAnimation()">Play</button>
+                <button class="pause-btn" onclick="pauseAnimation()">Pause</button>
             </div>
 
             <!-- Visualization Area -->
@@ -176,7 +177,6 @@
             <div class="controls">
                 <button class="btn btn-secondary" onclick="previousStep()">Previous</button>
                 <button class="btn btn-secondary" onclick="nextStep()">Next</button>
-                <button class="pause-btn" onclick="pauseAnimation()">Pause</button>
             </div>
         </div>
 
@@ -231,7 +231,6 @@
             function startAnimation() {
                 if (isAnimating) return;
                 isAnimating = true;
-                renderStep(0);
                 
                 function animate() {
                     if (currentStepIndex < steps.length - 1) {
