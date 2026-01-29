@@ -142,6 +142,7 @@ def quick_sort_view(request):
 def selection_sort_view(request):
     numbers_original = []
     sorted_data = None
+    steps = []
 
     if request.method == "POST":
         if "randomize" in request.POST:
@@ -152,12 +153,13 @@ def selection_sort_view(request):
             numbers_original = [int(x) for x in input_numbers.strip().split()]
             sorter = SelectionSort(numbers_original.copy())  
             sorted_data = sorter.sort()
+            steps = sorter.get_steps()
 
     return render(request, "selection_page.html", {
         "numbers": numbers_original,  
-        "sorted_data": sorted_data     
+        "sorted_data": sorted_data,
+        "steps": steps     
     })
-
 
     
 
